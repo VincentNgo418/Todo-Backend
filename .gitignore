@@ -3,6 +3,5 @@ node_modules/
 db/database.sqlite
 .env
 server.crt
-server.js
 server.key
 
