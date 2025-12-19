@@ -22,6 +22,10 @@ Mission.init({
         type: DataTypes.DATEONLY,
         allowNull: true,
     },
+    assignedTime: {
+        type: DataTypes.TIME,
+        allowNull: true,
+    },
     done: {
         type: DataTypes.BOOLEAN,
         defaultValue: false,
@@ -32,6 +36,10 @@ Mission.init({
     },
     priority: {
         type: DataTypes.FLOAT,
+        allowNull: true,
+    },
+    repeating: {
+        type: DataTypes.STRING,
         allowNull: true,
     },
     goalId: {
