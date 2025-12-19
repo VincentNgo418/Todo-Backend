@@ -9,5 +9,4 @@ router.get('/:id', journalController.getbyID);
 router.get('/', journalController.getAll);
 router.post('/', journalController.createNew);
 router.put('/:id', journalController.update);
-
 module.exports = router;
