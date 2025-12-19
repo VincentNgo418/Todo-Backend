@@ -6,6 +6,7 @@ const apiRoutes = require('./routes/api');
 const { syncDatabase } = require('./index');
 const fs = require('fs');
 const https = require('https');
+require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -18,6 +19,9 @@ const authMiddleware = (req, res, next) => {
     if (!token) {
         return res.status(401).json({ error: 'Unauthorized' });
     }
+    if(token !== process.env.AUTH_KEY) {
+        return res.status(403).json({ error: 'Forbidden' });
+    }
     next();
 
 
@@ -25,16 +29,16 @@ const authMiddleware = (req, res, next) => {
 }
 
 // API Routes
-app.use('/api', apiRoutes);
+app.use('/api', authMiddleware, apiRoutes);
 
 const SSL_OPTIONS = {
-    key: fs.readFileSync('/etc/letsencrypt/live/YOUR_DOMAIN/privkey.pem'),
-    cert: fs.readFileSync('/etc/letsencrypt/live/YOUR_DOMAIN/fullchain.pem'),
+    key: fs.readFileSync('./server.key'),
+    cert: fs.readFileSync('./server.crt'),
 };
 
 // Start the server and sync the database
 syncDatabase().then(() => {
-    https.createServer(SSL_OPTIONS, app).listen(80, () => {
-        console.log('Server is running securely on https://YOUR_DOMAIN');
+    https.createServer(SSL_OPTIONS, app).listen(PORT, () => {
+        console.log(`Server is running securely on https://localhost:${PORT}`);
     });
 });

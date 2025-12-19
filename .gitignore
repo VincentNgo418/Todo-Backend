@@ -2,3 +2,7 @@ node_modules/
 .vscode/
 db/database.sqlite
 .env
+server.crt
+server.js
+server.key
+
