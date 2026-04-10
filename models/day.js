@@ -14,7 +14,13 @@ Day.init({
     date: {
         type: DataTypes.DATEONLY,
         allowNull: false,
+        unique: true,
     },
+    show: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false,
+    }
 }, {
     sequelize,
     modelName: 'Day',

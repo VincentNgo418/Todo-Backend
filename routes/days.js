@@ -8,7 +8,9 @@ router.get('/render', dayController.renderDay);
 
 // New route to get all day objects
 router.get('/all', dayController.getAllDays);
+router.get('/active', dayController.getActive);
 router.post('/', dayController.create);
+router.put('/', dayController.updateByDate);
 router.delete('/:id', dayController.deleteDay);
 
 module.exports = router;

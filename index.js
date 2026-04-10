@@ -13,6 +13,7 @@ const Highlight = require('./models/highlight');
 const Drawing = require('./models/drawing');
 const JournalRating = require('./models/journalRating');
 const Note = require('./models/note');
+const RepeatingMission = require('./models/repeatingMission');
 
 // Define Associations
 // Missions can belong to a Goal or a Path
@@ -58,6 +59,10 @@ Note.belongsTo(Goal, { foreignKey: 'goalId' });
 Note.belongsTo(Path, { foreignKey: 'pathId' });
 Goal.hasMany(Note, { foreignKey: 'goalId' });
 Path.hasMany(Note, { foreignKey: 'pathId' });
+
+//Missions can belong to a repeatingMission
+Mission.belongsTo(RepeatingMission, { foreignKey: 'repeatingMissionId' });
+RepeatingMission.hasMany(Mission, { foreignKey: 'repeatingMissionId' });
 
 const syncDatabase = async () => {
     try {

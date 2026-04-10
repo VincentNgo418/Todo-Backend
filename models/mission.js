@@ -52,6 +52,10 @@ Mission.init({
         references: { model: 'Paths', key: 'id' },
         allowNull: true,
     },
+    defined: {
+        type: DataTypes.BOOLEAN,
+        allNull: false,
+    }
 }, {
     sequelize,
     modelName: 'Mission',

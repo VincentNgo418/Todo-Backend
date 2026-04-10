@@ -37,6 +37,7 @@ const highlightRoutes = require('./highlights');
 const drawingRoutes = require('./drawings');
 const journalRatingRoutes = require('./journalRatings');
 const noteRoutes = require('./notes');
+const repeatingMissionRoutes = require('./repeatingMissions');
 
 router.use('/days', dayRoutes);
 router.use('/missions', missionRoutes);
@@ -48,6 +49,7 @@ router.use('/highlights', highlightRoutes);
 router.use('/drawings', drawingRoutes);
 router.use('/journalRatings', journalRatingRoutes);
 router.use('/notes', noteRoutes);
+router.use('/repeatingMissions', repeatingMissionRoutes);
 
 // Simple echo endpoint for testing
 router.get('/echo', (req, res) => {

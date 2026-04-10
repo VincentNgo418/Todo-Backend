@@ -4,7 +4,21 @@ const { Op } = require('sequelize');
 
 exports.getAll = async (req, res) => {
     try {
-        const missions = await Mission.findAll();
+        const {defined, since} = req.query;
+        const whereClause = {};
+
+        if (defined !== undefined) {
+            whereClause.defined = defined === 'true';
+        }
+
+        if(since) {
+            whereClause.createdDate = {
+                [Op.gte]: new Date(since)
+            };
+
+        }
+
+        const missions = await Mission.findAll({where: whereClause, order: [['createdAt','DESC']]});
         res.status(200).json(missions);
     } catch (error) {
         res.status(500).json({ error: 'Failed to retrieve missions.' });
